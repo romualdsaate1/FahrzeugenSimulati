@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parameter>
+    <fenetre id="101">
+        <screenlang>800</screenlang>
+        <screenhaut>500</screenhaut>
+    </fenetre>
+    <rectbouton id="102">
+        <lang>800</lang>
+        <hohe>50</hohe>
+    </rectbouton>
+    <rectgreen id="103">
+        <lang>800</lang>
+        <hohe>20</hohe>
+    </rectgreen>
+    <linerect id="104">
+        <lang>800</lang>
+        <hohe>3</hohe>
+    </linerect>
+    <strasse id="105">
+        <langstrasse>800</langstrasse>
+        <hohestrasse>210</hohestrasse>
+        <langespuren>39</langespuren>
+    </strasse>
+
+    <car id="106">
+        <carlang>18</carlang>
+        <speedx>2</speedx>
+        <speedy>0</speedy>
+    </car>
+    <baustelle id="107">
+        <pos_x0>350</pos_x0>
+        <pos_y0>136</pos_y0>
+        <finpos_x0>635</finpos_x0>
+        <finpos_y0>300</finpos_y0>
+        <debut>0</debut>
+        <fin>235</fin>
+    </baustelle>
+    <frameechelle id="109">
+        <lang>800</lang>
+        <hohe>200</hohe>
+    </frameechelle>
+    <button id="109">
+        <pos_x>200</pos_x>
+        <pos_y>60</pos_y>
+        <width>15</width>
+        <height>25</height>
+        <pos_x>200</pos_x>
+        <pos_y>60</pos_y>
+    </button>
+    <param id="bk110">
+      <zeit_kal tau="0.1"/>
+      <spuren L="3" />
+      <zeit_ab dt="2"/>
+      <n_fah n_veh="35"/>
+      <pkw n_pkw="30"/>
+      <lkw n_lkv="0"/>
+      <zietschritt h="0.001"/>
+      <acc_pkw a_pkw="0.3"/>
+      <brems_pkw b_pkw="2"/>
+      <pkw_min_abs s_ref_pkw="6"/>
+      <b_acc_pkw v_ref_pkw="120/3.6"/>
+      <acc_pkw a_lkw="0.3"/>
+      <brems_pkw b_lkw="3.5"/>
+      <pkw_min_abs s_ref_lkw="15"/>
+      <b_acc_pkw v_ref_lkw="100/3.6"/>
+      <konst delta="4"/>
+      <fahr_lange length_lkw="6"/>
+      <fahr_lange length_pkw="3"/>
+      <framerate framerate="900"/>
+      <repeintrate repeintrate="1"/>
+   </param>
+</parameter>
+
