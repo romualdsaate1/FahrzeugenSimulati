@@ -112,7 +112,7 @@ def deplacement():
 
 # Une fonction pour modifier le deplacement vers la droite :
 def droite(event):
-    if Frame2.coords(raquette[0] < 200):
+   # if Frame2.coords(raquette[0] < 200):
         global dx, dy
         dx = 1
         dy = 0
