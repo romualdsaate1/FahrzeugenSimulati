@@ -81,8 +81,10 @@ def deplacement():
 #fonction qui permet de deplacer l'ensemble (car + radar)
 
 def moveCarAndRadar(x,y):
+
     Frame2.itemconfigure(vitesse, text=str(ve))
     Frame2.move(raquette, x, y)
+
     for el in rayon:
         Frame2.move(el, x, y)
         #Frame2.move(sensor2, x, y)
@@ -100,10 +102,6 @@ def changeDirection(fx,fy,T):
         Frame2.itemconfigure(vitesse, text=str(ve))
 
 
-
-
-
-
     Frame2.move(raquette, fx, fy)
     for el in rayon:
         Frame2.move(el, fx, fy)
@@ -116,19 +114,26 @@ def changeDirection(fx,fy,T):
 def detectObstacle():
 
     if(mytest ==0):
+        print(Frame2.coords(raquette))
         Frame2.itemconfigure(text, text="radar on")
         for el in rayon:
+
             if (Frame2.coords(el)[3] > Frame2.coords(courbe)[1]) and (
                     Frame2.coords(el)[0] < Frame2.coords(courbe)[2]) and (
                     Frame2.coords(el)[2] > Frame2.coords(courbe)[0]):
-                distance = Frame2.coords(courbe)[0] - Frame2.coords(el)[2] + 100
+                distance = Frame2.coords(rects)[0] - Frame2.coords(el)[2] + 100
                 dis = round(distance, 2)
 
                 t = "obstacle no 1 à " + str(dis)
                 Frame2.itemconfigure(text, text=t)
-                changeDirection(0, -1, T)
 
-        for el in rayon:
+
+                changeDirection(0, -0.4, T)
+        if (Frame2.coords(raquette)[0] > 450) and(Frame2.coords(raquette)[0]<560):
+
+            changeDirection(0, 1, T)
+
+        """for el in rayon:
             if (Frame2.coords(el)[3] > Frame2.coords(baustelle)[1]) and (
                     Frame2.coords(el)[0] < Frame2.coords(baustelle)[2]) and (
                     Frame2.coords(el)[2] > Frame2.coords(baustelle)[0]):
@@ -137,7 +142,7 @@ def detectObstacle():
 
                 t = "obstacle no 2 à " + str(dis)
                 Frame2.itemconfigure(text, text=t)
-                changeDirection(0, -1, T)
+                changeDirection(0, -1, T)"""
 
 
 
@@ -231,6 +236,9 @@ Frame2 = Canvas(fenetre, borderwidth=0, relief=GROOVE, width=langstr, height=hoh
 Frame2.pack(padx =0, pady =0)
 c, r=0.25, 0
 
+
+
+
 #creation des separations de la route
 while c<40:
     Frame2.create_rectangle((2*c*39, 69), ((2*c+1)*39, 71), fill='white', width=0) #on crée le premier carré, puis le deuxième, et ainsi de suite...
@@ -252,9 +260,59 @@ coords = [(0,600), (100,348), (88,348), (0,251)]
 #li2=Frame2.create_line(210,140,355,75,640,75,700,140,fill='orange')
 
 
-coord = 200,275,500, 130
-courbe = Frame2.create_arc(coord, start=0, extent=150, outline="gray")
+coord = 200,275,500, 155
+#courbe = Frame2.create_line(coord, fill='grey')
+courbe = Frame2.create_arc(coord, start=0, extent=150, outline="grey")
 
+
+
+def generateroad(width):
+    coord=[0,210,50,210,100,210,150,210,200,210,250,185,300,165,390,155,480,165,530,185,580,210,635,210,690,210,745,210,800,210]
+
+    coord1=[]
+
+    red=50
+
+    l = len(coord)
+
+
+    for x in range(0, l):
+
+        if (x%2 ==0):
+            coord1.append(coord[x])
+
+
+
+        else:
+            coord1.append(coord[x]-width)
+
+
+    li1 = Frame2.create_line(coord, fill='white', width='2')
+    li2 = Frame2.create_line(coord1, fill='white', width='2')
+
+    c=6
+
+    while c <= l-7:
+        Frame2.create_line(coord[c],coord[c+1],coord[c+2],coord[c+3], fill='orange', width='2')
+        Frame2.create_line(coord1[c],coord1[c+1],coord1[c+2],coord1[c+3], fill='orange', width='2')
+
+        c = c + 4
+
+    return [li1,li2];
+
+re=generateroad(140)
+li1 =re[0]
+li2 = re[1]
+
+
+
+
+
+
+
+
+#create road
+#li2=Frame2.create_line(0,210,200,210,250,180,300,160,330,155,390,150,450,155,480,160,530,180,580,210,800,210,fill='orange',width='2')
 # Create object Baustelle
 for user in tree.xpath("/parameter/baustelle/pos_x0"):
     b1= user.text
@@ -269,7 +327,7 @@ for user in tree.xpath("/parameter/baustelle/debut"):
     d1= user.text
 for user in tree.xpath("/parameter/baustelle/fin"):
     f1= user.text
-baustelle = Frame2.create_arc(500, b2,b3,b4, start=d1, extent=f1, fill='red')
+#baustelle = Frame2.create_arc(500, b2,b3,b4, start=d1, extent=f1, fill='red')
 
 
 #fin de #creation du deuxième obstacle
@@ -279,38 +337,10 @@ baustelle = Frame2.create_arc(500, b2,b3,b4, start=d1, extent=f1, fill='red')
 #On cree un object Car:
 
 
-photo = PhotoImage(file="red_car.png")
 
-
-raquette = Frame2.create_image(0,150, anchor=NW, image=photo)
 
 #raquette = Frame2.create_rectangle(0,160,45,190,fill='yellow')
-for user in tree.xpath("/parameter/radar/angle"):
-    angle= user.text
 
-new_angle = float(angle)/2
-
-angle_in_radians = new_angle * math.pi / 180
-angle_in_radians = -1*angle_in_radians
-angle_in_radians2 = new_angle * math.pi / 180
-line_length = 105
-center_x = 60
-center_y = 165
-end_x = center_x + line_length * math.cos(angle_in_radians)
-end_y = center_y + line_length * math.sin(angle_in_radians)
-end_x2 = center_x + line_length * math.cos(angle_in_radians2)
-end_y2 = center_y + line_length * math.sin(angle_in_radians2)
-
-
-sensor1 = Frame2.create_line(60, 165, end_x ,end_y, fill='white')
-sensor2 = Frame2.create_line(60, 165, 160,165, fill='white')
-sensor3 = Frame2.create_line(60, 165, end_x2,end_y2,fill='white')
-text=Frame2.create_text(85, 175, text="20 m", anchor=SW, font="italic")
-
-rayon=[];
-rayon.append(sensor1)
-rayon.append(sensor2)
-rayon.append(sensor3)
 
 
 
@@ -428,16 +458,44 @@ for item in [fig, ax]:
 ax.axis('off')
 
 
-ax.plot(X, Y,color='yellow')
+ax.plot(X, Y,color='grey')
 
 # Keep this handle alive, or else figure will disappear
 fig_x, fig_y = 55, 125
 fig_photo = draw_figure(Frame2, fig, loc=(fig_x, fig_y))
 fig_w, fig_h = fig_photo.width(), fig_photo.height()
 
+photo = PhotoImage(file="red_car.png")
 
 
+raquette = Frame2.create_image(0,165, anchor=NW, image=photo)
 
+for user in tree.xpath("/parameter/radar/angle"):
+    angle= user.text
+
+new_angle = float(angle)/2
+
+angle_in_radians = new_angle * math.pi / 180
+angle_in_radians = -1*angle_in_radians
+angle_in_radians2 = new_angle * math.pi / 180
+line_length = 105
+center_x = 60
+center_y = 180
+end_x = center_x + line_length * math.cos(angle_in_radians)
+end_y = center_y + line_length * math.sin(angle_in_radians)
+end_x2 = center_x + line_length * math.cos(angle_in_radians2)
+end_y2 = center_y + line_length * math.sin(angle_in_radians2)
+
+
+sensor1 = Frame2.create_line(60, 180, end_x ,end_y, fill='white')
+sensor2 = Frame2.create_line(60, 180, 160,180, fill='white')
+sensor3 = Frame2.create_line(60, 180, end_x2,end_y2,fill='white')
+text=Frame2.create_text(85, 180, text="20 m", anchor=SW, font="italic")
+
+rayon=[];
+rayon.append(sensor1)
+rayon.append(sensor2)
+rayon.append(sensor3)
 
 
 deplacement()
