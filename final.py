@@ -85,7 +85,7 @@ def deplacement():
 
 def moveCarAndRadar(x,y):
 
-    Frame2.itemconfigure(vitesse, text=str(ve))
+    Frame2.itemconfigure(vitesse, text=str(ve))#permet d'afficher la nouvelle vitesse
     Frame2.move(raquette, x, y)
 
     for el in rayon:
@@ -94,6 +94,11 @@ def moveCarAndRadar(x,y):
         #Frame2.move(sensor3, x, y)
    # Frame2.move(arc, x, y)
     Frame2.move(text, x, y)
+
+"""
+fx c'est la distance à laquelle on deplacera x et fy celle de y
+T ici représente la nouvelle frequence d'affichage de la fenetre principale (elle permet de simuler le déplacement de la voiture) mais elle ne change pas.
+"""
 
 def changeDirection(fx,fy,T):
     old =T
@@ -105,13 +110,47 @@ def changeDirection(fx,fy,T):
         Frame2.itemconfigure(vitesse, text=str(ve))
 
 
+
     Frame2.move(raquette, fx, fy)
     for el in rayon:
         Frame2.move(el, fx, fy)
     #Frame2.move(arc, fx, fy)
     Frame2.move(text, fx, fy)
 
+"""
+ici rayon est le tableau contenant tous les rayons du radar
+tabOb est le tableau contenant tous les obstacles
+li1 est la ligne rouge superieure collée à la route
+li2 est la ligne rouge inférieure collée à la route
+firstindex est la postion du rayon supérieur dans le tableau des rayons
+lastindex est la postion du rayon inférieur dans le tableau des rayons
 
+ces lignes me permettent de savoir de quel coté la voiture peut passer
+
+la fonction fait ceci:
+
+#1 pour chaque rayon contenu dans le tableau de rayon,
+je regarde si l'extremité supérieure de mon rayon rencontre l'extremité gauche d'un obstacle et si l'extrémité inférieure 
+ ne rencontre pas celle de l'obstacle(ceci se fait en regardant
+l'axe des abscisses et ça me permet de savoir si la voiture est encore derrière l'obstacle)
+
+#2 ensuite je calcule la distance entre le coté supérieur de la route et le coté inférieure de la route avec l'obstacle
+
+ ensuite je determine par où la voiture doit passer
+
+#3si la voiture doit passer par le haut:
+  
+  #4 je regarde d'abord si le rayon extreme est en dessous de l'obstacle:
+    si oui, la voiture continue tout droit car elle ne rencontrera pas l'obstacle
+    
+    #5si non la voiture doit alors changer de direction.
+    
+le principe est pareil pour le bas
+  
+
+
+
+"""
 def detectObstacle():
 
     if(mytest ==0):
@@ -120,19 +159,19 @@ def detectObstacle():
 
         for el in rayon:
             for ob in tabOb:
-                if (Frame2.coords(el)[2] > Frame2.coords(ob)[0]) and (
-                        Frame2.coords(el)[0] < Frame2.coords(ob)[2] + 60) :
-                    first = Frame2.coords(ob)[1] - Frame2.coords(li1)[1]
-                    second = Frame2.coords(li2)[1] - Frame2.coords(rects)[3]
-                    if (first > second):
+                if (Frame2.coords(el)[2] > Frame2.coords(ob)[0]) and (#1
+                        Frame2.coords(el)[0] < Frame2.coords(ob)[2] + 60) :#1
+                    first = Frame2.coords(ob)[1] - Frame2.coords(li1)[1]#2
+                    second = Frame2.coords(li2)[1] - Frame2.coords(rects)[3]#2
+                    if (first > second):#3
 
                         if(Frame2.coords(rayon[firstindex])[3] > Frame2.coords(ob)[1])and(Frame2.coords(rayon[firstindex])[3] > Frame2.coords(ob)[3]):
-                            te=1
+                            te=1#4
                         else:
-                            te=0
+                            te=0#5
                         if(te ==0):
 
-                            if(Frame2.coords(rayon[lastindex])[3] > Frame2.coords(ob)[1]):
+                            if(Frame2.coords(rayon[lastindex])[3] > Frame2.coords(ob)[1]):#5
 
                             #if (Frame2.coords(el)[3] > Frame2.coords(ob)[1]):
                                 distance = Frame2.coords(ob)[0] - Frame2.coords(raquette)[0] - 60
@@ -142,7 +181,7 @@ def detectObstacle():
                                 Frame2.itemconfigure(text, text=t)
 
                                 changeDirection(0.2, -0.5, T)
-                    else:
+                    else:#3
                         if (Frame2.coords(rayon[lastindex])[3] < Frame2.coords(ob)[1]) and (
                                 Frame2.coords(rayon[lastindex])[3] < Frame2.coords(ob)[3]):
                             te = 1
