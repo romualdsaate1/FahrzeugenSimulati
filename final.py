@@ -61,11 +61,15 @@ line1.pack(padx=0,pady=0)
 
 #fin de la creation du 1er espacement
 
-
+def resetPosition():
+    if(Frame2.coords(raquette)[0] > 1085 and Frame2.coords(raquette)[1] <165):
+        changeDirection(0.1, 0.9, T)
 
 def deplacement():
     global dx, dy,ve,T
     # On deplace la balle :
+
+
 
     moveCarAndRadar(dx, dy)
 
@@ -73,6 +77,7 @@ def deplacement():
     #dis = round(distance, 2)
 
     detectObstacle()
+    resetPosition()
 
 
     # On repete cette fonction
@@ -159,7 +164,7 @@ def detectObstacle():
             if (Frame2.coords(el)[2] > Frame2.coords(ob)[0]) and (#1
                     Frame2.coords(el)[0] < Frame2.coords(ob)[2] + 60) :#1
                 first = Frame2.coords(ob)[1] - Frame2.coords(li1)[1]#2
-                second = Frame2.coords(li2)[1] - Frame2.coords(rects)[3]#2
+                second = Frame2.coords(li2)[1] - Frame2.coords(ob)[3]#2
                 if (first > second):#3
 
                     if(Frame2.coords(rayon[firstindex])[3] > Frame2.coords(ob)[1])and(Frame2.coords(rayon[firstindex])[3] > Frame2.coords(ob)[3]):
@@ -177,7 +182,7 @@ def detectObstacle():
                             t = "obstacle at " + str(dis)
                             Frame2.itemconfigure(text, text=t)
 
-                            changeDirection(0.2, -0.5, T)
+                            changeDirection(0.1, -0.5, T)
                 else:#3
                     if (Frame2.coords(rayon[lastindex])[3] < Frame2.coords(ob)[1]) and (
                             Frame2.coords(rayon[lastindex])[3] < Frame2.coords(ob)[3]):
@@ -196,7 +201,7 @@ def detectObstacle():
                             t = "obstacle at " + str(dis)
                             Frame2.itemconfigure(text, text=t)
 
-                            changeDirection(0.2, 0.5, T)
+                            changeDirection(0.1, 0.5, T)
 
 
 
