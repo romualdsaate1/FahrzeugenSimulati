@@ -1,0 +1,92 @@
+description des fonctions et paramètres:
+
+dx=1.7 #déplacement initial sur l'axe des abscisses:je suppose que c'est en mètre
+dy=0 #déplacement initial sur l'axe des ordonnées:
+
+T=100 #la position de la voiture est actualisée après chaque 100ms au départ
+
+V = 1.7*1000/T #vitesse initiale en m/s
+ve = str(V) #vitesse en chaine de caratère (pour l'affichage)
+
+
+def moveCarAndRadar(x,y):
+
+    x = abscisse
+    y = ordonnée
+    permet le deplacement du radar et de la voiture de x pixel suivant l'axe des abscisses et de y pixels suivant l'axe
+
+
+def changeDirection(fx,fy,T):
+
+    fx = abscisse
+    fy = ordonnée
+    T = vitesse à laquelle la voiture se déplace (frequence d'actualisation de la position de la voiture)
+    permet d'efffectuer le changement de direction suivant l'axe x et y avec la vitesse T
+
+def stopCar():
+ permet de reduire la vitesse de deplacement de la voiture (simulant un arret)
+
+def startCar():
+ réinitialise la vitesse de deplacement de la voiture (vitesse de depart)
+
+
+def detectObstacle():
+
+    rayon = tableau des rayons constituant le radar
+    tabOb =tableau contenant tous les obstacles
+    li1 = la ligne rouge superieure collée à la route
+    li2 = la ligne rouge inférieure collée à la route
+    firstindex = postion du rayon supérieur dans le tableau des rayons
+    lastindex =  postion du rayon inférieur dans le tableau des rayons
+
+    permet au radar de detecter la présence d'un obstacle.
+
+
+    Frame2.itemconfigure(text, text="radar on")
+
+    for el in rayon:
+        for ob in tabOb:
+            if (Frame2.coords(el)[2] > Frame2.coords(ob)[0]) and (#1
+                    Frame2.coords(el)[0] < Frame2.coords(ob)[2] + 60) :#1
+                first = Frame2.coords(ob)[1] - Frame2.coords(li1)[1]#2
+                second = Frame2.coords(li2)[1] - Frame2.coords(rects)[3]#2
+                if (first > second):#3
+
+                    if(Frame2.coords(rayon[firstindex])[3] > Frame2.coords(ob)[1])and(Frame2.coords(rayon[firstindex])[3] > Frame2.coords(ob)[3]):
+                        te=1#4
+                    else:
+                        te=0#5
+                    if(te ==0):
+
+                        if(Frame2.coords(rayon[lastindex])[3] > Frame2.coords(ob)[1]):#5
+
+                        #if (Frame2.coords(el)[3] > Frame2.coords(ob)[1]):
+                            distance = Frame2.coords(ob)[0] - Frame2.coords(raquette)[0] - 60
+                            dis = round(distance, 2)
+
+                            t = "obstacle at " + str(dis)
+                            Frame2.itemconfigure(text, text=t)
+
+                            changeDirection(0.2, -0.5, T)
+                else:#3
+                    if (Frame2.coords(rayon[lastindex])[3] < Frame2.coords(ob)[1]) and (
+                            Frame2.coords(rayon[lastindex])[3] < Frame2.coords(ob)[3]):
+                        te = 1
+                    else:
+                        te = 0
+                    if (te == 0):
+
+
+                        if (Frame2.coords(rayon[firstindex])[3] < Frame2.coords(ob)[3]):
+
+                        #if (Frame2.coords(el)[3] < Frame2.coords(ob)[3]):
+                            distance = Frame2.coords(ob)[0] - Frame2.coords(raquette)[0] - 60
+                            dis = round(distance, 2)
+
+                            t = "obstacle at " + str(dis)
+                            Frame2.itemconfigure(text, text=t)
+
+                            changeDirection(0.2, 0.5, T)
+
+
+
