@@ -64,7 +64,7 @@ line1.pack(padx=0,pady=0)
 
 
 def deplacement():
-    global dx, dy,mytest,ve,T
+    global dx, dy,ve,T
     # On deplace la balle :
 
     moveCarAndRadar(dx, dy)
@@ -72,10 +72,7 @@ def deplacement():
     #distance = Frame2.coords(rects)[0] - Frame2.coords(raquette)[0] -60
     #dis = round(distance, 2)
 
-
     detectObstacle()
-
-
 
 
     # On repete cette fonction
@@ -153,53 +150,53 @@ le principe est pareil pour le bas
 """
 def detectObstacle():
 
-    if(mytest ==0):
-        #print(Frame2.coords(raquette))
-        Frame2.itemconfigure(text, text="radar on")
-
-        for el in rayon:
-            for ob in tabOb:
-                if (Frame2.coords(el)[2] > Frame2.coords(ob)[0]) and (#1
-                        Frame2.coords(el)[0] < Frame2.coords(ob)[2] + 60) :#1
-                    first = Frame2.coords(ob)[1] - Frame2.coords(li1)[1]#2
-                    second = Frame2.coords(li2)[1] - Frame2.coords(rects)[3]#2
-                    if (first > second):#3
-
-                        if(Frame2.coords(rayon[firstindex])[3] > Frame2.coords(ob)[1])and(Frame2.coords(rayon[firstindex])[3] > Frame2.coords(ob)[3]):
-                            te=1#4
-                        else:
-                            te=0#5
-                        if(te ==0):
-
-                            if(Frame2.coords(rayon[lastindex])[3] > Frame2.coords(ob)[1]):#5
-
-                            #if (Frame2.coords(el)[3] > Frame2.coords(ob)[1]):
-                                distance = Frame2.coords(ob)[0] - Frame2.coords(raquette)[0] - 60
-                                dis = round(distance, 2)
-
-                                t = "obstacle at " + str(dis)
-                                Frame2.itemconfigure(text, text=t)
-
-                                changeDirection(0.2, -0.5, T)
-                    else:#3
-                        if (Frame2.coords(rayon[lastindex])[3] < Frame2.coords(ob)[1]) and (
-                                Frame2.coords(rayon[lastindex])[3] < Frame2.coords(ob)[3]):
-                            te = 1
-                        else:
-                            te = 0
-                        if (te == 0):
 
 
-                            if (Frame2.coords(rayon[firstindex])[3] < Frame2.coords(ob)[3]):
+    Frame2.itemconfigure(text, text="radar on")
 
-                            #if (Frame2.coords(el)[3] < Frame2.coords(ob)[3]):
-                                distance = Frame2.coords(ob)[0] - Frame2.coords(raquette)[0] - 60
-                                dis = round(distance, 2)
+    for el in rayon:
+        for ob in tabOb:
+            if (Frame2.coords(el)[2] > Frame2.coords(ob)[0]) and (#1
+                    Frame2.coords(el)[0] < Frame2.coords(ob)[2] + 60) :#1
+                first = Frame2.coords(ob)[1] - Frame2.coords(li1)[1]#2
+                second = Frame2.coords(li2)[1] - Frame2.coords(rects)[3]#2
+                if (first > second):#3
 
-                                t = "obstacle at " + str(dis)
-                                Frame2.itemconfigure(text, text=t)
+                    if(Frame2.coords(rayon[firstindex])[3] > Frame2.coords(ob)[1])and(Frame2.coords(rayon[firstindex])[3] > Frame2.coords(ob)[3]):
+                        te=1#4
+                    else:
+                        te=0#5
+                    if(te ==0):
 
-                                changeDirection(0.2, 0.5, T)
+                        if(Frame2.coords(rayon[lastindex])[3] > Frame2.coords(ob)[1]):#5
+
+                        #if (Frame2.coords(el)[3] > Frame2.coords(ob)[1]):
+                            distance = Frame2.coords(ob)[0] - Frame2.coords(raquette)[0] - 60
+                            dis = round(distance, 2)
+
+                            t = "obstacle at " + str(dis)
+                            Frame2.itemconfigure(text, text=t)
+
+                            changeDirection(0.2, -0.5, T)
+                else:#3
+                    if (Frame2.coords(rayon[lastindex])[3] < Frame2.coords(ob)[1]) and (
+                            Frame2.coords(rayon[lastindex])[3] < Frame2.coords(ob)[3]):
+                        te = 1
+                    else:
+                        te = 0
+                    if (te == 0):
+
+
+                        if (Frame2.coords(rayon[firstindex])[3] < Frame2.coords(ob)[3]):
+
+                        #if (Frame2.coords(el)[3] < Frame2.coords(ob)[3]):
+                            distance = Frame2.coords(ob)[0] - Frame2.coords(raquette)[0] - 60
+                            dis = round(distance, 2)
+
+                            t = "obstacle at " + str(dis)
+                            Frame2.itemconfigure(text, text=t)
+
+                            changeDirection(0.2, 0.5, T)
 
 
 
