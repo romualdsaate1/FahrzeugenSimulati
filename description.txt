@@ -89,4 +89,36 @@ def detectObstacle():
                             changeDirection(0.2, 0.5, T)
 
 
+création du radar:
+
+for user in tree.xpath("/parameter/radar/angle"):
+    angle= user.text # angle du radar en dégré
+
+new_angle = float(angle)/2 # moitié de l'angle du radar en dégré
+
+angle_in_radians = new_angle * math.pi / 180 #moitié de l'angle du radar en radian
+angle_in_radians = -1*angle_in_radians   #moitié de l'angle du radar en radian (négatif)
+angle_in_radians2 = new_angle * math.pi / 180  #moitié de l'angle du radar en radian (positif)
+
+line_length = 105  #longueur des rayons du radar
+center_x = 60  #abscisse du point de depart des rayons du radar
+center_y = 180 #ordonnée du point de départ des rayons du radar
+
+end_x = center_x + line_length * math.cos(angle_in_radians) #abscise du point d'arrivée du rayon extreme supérieur du radar
+end_y = center_y + line_length * math.sin(angle_in_radians) #ordonnée du point d'arrivée du rayon extreme supérieur du radar
+end_x2 = center_x + line_length * math.cos(angle_in_radians2) #abscise du point d'arrivée du rayon extreme inférieur du radar
+end_y2 = center_y + line_length * math.sin(angle_in_radians2) #ordonnée du point d'arrivée du rayon extreme inférieur du radar
+
+
+sensor1 = Frame2.create_line(60, 180, end_x ,end_y, fill='white') #rayon  extreme supérieur du radar
+sensor2 = Frame2.create_line(60, 180, 160,180, fill='white')  # rayon central du radar (celui qui divise l'angle du radar en deux).
+sensor3 = Frame2.create_line(60, 180, end_x2,end_y2,fill='white') # rayon extreme inférieur du radar
+text=Frame2.create_text(85, 180, text="20 m", anchor=SW, font="italic") #champ d'affichage des vitesses
+
+rayon=[]; #tableau contenant tous les rayons.
+rayon.append(sensor1)
+rayon.append(sensor2)
+rayon.append(sensor3)
+
+
 
