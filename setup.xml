@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <parameter>
+      <rectgreen id="103">
+        <lang>1400</lang>
+        <hohe>50</hohe>
+    </rectgreen>
     <fenetre id="101">
-        <screenlang>800</screenlang>
+        <screenlang>1400</screenlang>
         <screenhaut>500</screenhaut>
     </fenetre>
     <rectbouton id="102">
         <lang>800</lang>
         <hohe>80</hohe>
     </rectbouton>
-    <rectgreen id="103">
-        <lang>800</lang>
-        <hohe>50</hohe>
-    </rectgreen>
+
     <linerect id="104">
-        <lang>800</lang>
+        <lang>1400</lang>
         <hohe>3</hohe>
     </linerect>
     <strasse id="105">
-        <langstrasse>800</langstrasse>
+        <langstrasse>1400</langstrasse>
         <hohestrasse>210</hohestrasse>
         <langespuren>39</langespuren>
     </strasse>
 
     <car id="106">
         <carlang>18</carlang>
-        <speedx>2</speedx>
+        <speedx>1</speedx>
         <speedy>0</speedy>
     </car>
     <baustelle id="107">
@@ -73,5 +74,29 @@
         <angle>40</angle>
 
     </radar>
+    <ob1 id="200">
+        <x1>280</x1>
+        <y1>168</y1>
+        <x2>310</x2>
+        <y2>200</y2>
+    </ob1>
+    <ob2 id="201">
+        <x1>530</x1>
+        <y1>118</y1>
+        <x2>560</x2>
+        <y2>180</y2>
+    </ob2>
+    <ob3 id="202">
+        <x1>740</x1>
+        <y1>5</y1>
+        <x2>800</x2>
+        <y2>90</y2>
+    </ob3>
+    <ob4 id="203">
+        <x1>1000</x1>
+        <y1>100</y1>
+        <x2>1080</x2>
+        <y2>130</y2>
+    </ob4>
 </parameter>
 
