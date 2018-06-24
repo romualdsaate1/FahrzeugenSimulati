@@ -326,10 +326,57 @@ while c<40:
 #creation de l'obstacle no 1
 
 
-rects = Frame2.create_rectangle(280, 168, 310, 200, outline="red", fill="blue", width=2)
-rects2 = Frame2.create_rectangle(530, 118, 560, 180, outline="red", fill="blue", width=2)
-rects3 = Frame2.create_rectangle(740, 5, 800, 90, outline="red", fill="blue", width=2)
-rects4 = Frame2.create_rectangle(1000, 100, 1080, 130, outline="red", fill="blue", width=2)
+#rects = Frame2.create_rectangle(280, 168, 310, 200, outline="red", fill="blue", width=2)
+#rects2 = Frame2.create_rectangle(530, 118, 560, 180, outline="red", fill="blue", width=2)
+#rects3 = Frame2.create_rectangle(740, 5, 800, 90, outline="red", fill="blue", width=2)
+#rects4 = Frame2.create_rectangle(1000, 100, 1080, 130, outline="red", fill="blue", width=2)
+
+data1=[]
+data2=[]
+data3=[]
+data4=[]
+for val in tree.xpath("/parameter/ob1/x1"):
+    data1.append(val.text)
+for val in tree.xpath("/parameter/ob1/y1"):
+    data1.append(val.text)
+for val in tree.xpath("/parameter/ob1/x2"):
+    data1.append(val.text)
+for val in tree.xpath("/parameter/ob1/y2"):
+    data1.append(val.text)
+
+for val in tree.xpath("/parameter/ob2/x1"):
+    data2.append(val.text)
+for val in tree.xpath("/parameter/ob2/y1"):
+    data2.append(val.text)
+for val in tree.xpath("/parameter/ob2/x2"):
+    data2.append(val.text)
+for val in tree.xpath("/parameter/ob2/y2"):
+    data2.append(val.text)
+
+for val in tree.xpath("/parameter/ob3/x1"):
+    data3.append(val.text)
+for val in tree.xpath("/parameter/ob3/y1"):
+    data3.append(val.text)
+for val in tree.xpath("/parameter/ob3/x2"):
+    data3.append(val.text)
+for val in tree.xpath("/parameter/ob3/y2"):
+    data3.append(val.text)
+
+for val in tree.xpath("/parameter/ob4/x1"):
+    data4.append(val.text)
+for val in tree.xpath("/parameter/ob4/y1"):
+    data4.append(val.text)
+for val in tree.xpath("/parameter/ob4/x2"):
+    data4.append(val.text)
+for val in tree.xpath("/parameter/ob4/y2"):
+    data4.append(val.text)
+
+print (data1)
+
+rects = Frame2.create_rectangle(data1[0],data1[1],data1[2],data1[3], outline="red", fill="blue", width=2)
+rects2 = Frame2.create_rectangle(data2[0],data2[1],data2[2],data2[3], outline="red", fill="blue", width=2)
+rects3 = Frame2.create_rectangle(data3[0],data3[1],data3[2],data3[3], outline="red", fill="blue", width=2)
+rects4 = Frame2.create_rectangle(data4[0],data4[1],data4[2],data4[3], outline="red", fill="blue", width=2)
 
 tabOb =[]
 tabOb.append(rects)
